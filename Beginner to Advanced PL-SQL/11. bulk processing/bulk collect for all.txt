@@ -1,0 +1,34 @@
+
+	~ Bulk Collect and FOR ALL ~
+  * Bulk Collect:
+  SELECT statements that retrieve multiple rows with a single fetch,
+  improving the speed of data retrieval.
+  We will use BULK COLLECT fnuctionality to fetch all the ORDER_IDs
+  and stoer it in collection.
+
+  * FOR ALL:
+  INSERTs, UPDATEs, and DELETEs that use collections to change multiple
+  rows of data very quickly.
+
+  We will use FOR ALL functionality to update all the rows stored in the
+  collection. FOR ALL "bundles up" all the updates and passes them to the
+  SQL engine with a single context switch.
+
+
+CREATE OR REPLACE PROCEDURE update_tax (
+    tax_rate IN NUMBER
+) AS 
+	l_eligible BOOLEAN;
+	TYPE order_id_type IS TABLE OF sales.order_id%TYPE 
+        INDEX BY PLS_INTEGER;
+	l_order_ids order_id_type;
+BEGIN
+    SELECT DISTINCT order_id BULK COLLECT INTO l_order_ids
+    FROM sales;
+
+	FORALL indx IN 1 .. l_order_ids.COUNT
+        UPDATE SALES
+        SET tax_amount = total_amount + tax_rate
+        WHERE order_id = l_order_ids(indx);
+END;
+/

@@ -1,0 +1,32 @@
+
+CREATE OR REPLACE PROCEDURE fetch_sales_cur (
+    sales_date_param DATE
+) AS
+	CURSOR sale_cursor IS
+		SELECT * FROM sales
+		WHERE sales_date = sales_date_param;
+	TYPE sales_table IS TABLE OF sales%ROWTYPE;
+	l_sales sales_table;
+BEGIN
+    OPEN sale_cursor;
+
+	LOOP
+    FETCH sale_cursor BULK COLLECT INTO l_sales LIMIT 100;
+	FOR indx IN 1..l_sales.COUNT LOOP
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).sales_date);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).order_id);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).product_id);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).customer_id);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).salesperson_id);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).quantity);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).unit_price);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).sales_amount);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).tax_amount);
+		DBMS_OUTPUT.PUT_LINE(l_sales(indx).total_amount);
+    END LOOP;
+
+    END LOOP;
+	CLOSE sale_cursor;
+END;
+
+EXECUTE fetch_sales_cur(TO_DATE('09-feb-2015', 'dd-mon-yyyy'));

@@ -1,0 +1,48 @@
+
+	~ Bulk Collect with Limit ~
+  PL/SQL collections are essentially arrays in memory, massive collections
+  can have a detrimental effect on system performance due to the amount of
+  memory they require.
+  In some situations, it may be necessary to split the data being processed
+  into chunks to make the code more memory-friendly.
+
+  This "chunking" can be achieved using the LIMIT clause of the BULK COLLECT
+  syntax
+ 
+  SELECT DISTINCT order_id BULK COLLECT INTO l_order_ids FROM sales;
+  
+
+CREATE OR REPLACE PROCEDURE update_tax (
+    tax_rate IN NUMBER
+) AS
+    l_eligible BOOLEAN;
+	TYPE order_id_type TABLE OF sales.order_id%TYPE 
+        INDEX BY PLS_INTEGER; -- associative array
+	l_order_ids order_id_type;
+	l_eligible_orders order_id_type;
+	CURSOR sales_cursor IS SELECT DISTINCT order_id FROM sales;
+BEGIN
+    OPEN sales_cursor;
+
+	LOOP 
+        FETCH sales_cursors BULK COLLECT INTO l_order_ids LIMIT 100;
+
+		FOR indx in 1..l_order_ids.COUNT LOOP
+        	check_eligible(l_order_ids(indx), l_eligible);
+			IF l_eligible THEN
+                l_eligible_orders(l_eligible_orders.COUNT * 1) := l_order_ids(indx);
+            END IF;
+		END LOOP;
+
+	EXIT WHEN l_order_ids.COUNT = 0;
+	END LOOP;
+
+	FORALL indx IN 1..l_eligible_orders.COUNT
+        UPDATE sales s
+        SET s.tax_amount = s.total_amount * tax_rate
+        WHERE s.order_id = l_eligible_order(indx);
+
+	CLOSE sales_cursor;
+END update_tax;
+
+EXECUTE update_tax;

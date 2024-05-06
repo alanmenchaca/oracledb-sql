@@ -1,0 +1,53 @@
+
+	~ Bulk Collect Exceptions ~
+  * Suppose, we are inserting 10,000 rows and after inserting 9,000 of
+    those rows, the 9,001st insert fails with some errors.
+  * For the SQL sengine passes that error back to the PL/SQL engine and
+    PL/SQL will temrinate the FORALL statement.
+  * The remaning 999 rows will not be inserted.
+
+
+  SQL%BULK_EXCEPTIONS
+  * If you want the PL/SQL engine to execute as many of the DML statements
+    as possible, even if errors are raised along the way, add the SAVE
+    EXCEPTIONS clause to the FORALL header.
+  * Then, if the SQL engine raises an error, the PL/SQL engine will save
+    that information in a pseudo collection named SQL%BULK_EXCEPTIONS, and
+    continue executing statements.
+  * When all statements have been attempted PL/SQL then raises the
+    ORA-24381 error.
+
+
+CREATE TABLE sales_copy AS SELECT * FROM sales WHERE 0=1;
+
+CREATE OR REPLACE PROCEDURE insert_sales_cursor (
+    sales_date_param VARCHAR2
+) AS
+    CURSOR sales_cursor IS
+    	SELECT * FROM sales
+    	WHERE sales_date = sales_date_param;
+	TYPE sales_table_type IS TABLE OF SALES%ROWTYPE;
+	sales_table sales_table_type;
+BEGIN
+	OPEN sales_cursor;
+	LOOP
+		FETCH sales_cursor BULK COLLECT INTO sales_table LIMIT 100;
+		FORALL indx IN 1..sales_table.COUNT SAVE EXCEPTIONS
+        	INSERT INTO sales_copy VALUES sales_table(indx);
+		EXIT WHEN sales_cursor%NOTFOUND;
+    END LOOP;
+	CLOSE sales_cursor;
+
+	EXCEPTION
+        WHEN others THEN
+			IF sqlcode = -24381 THEN
+        		FOR indx IN 1..SQL%BULK_EXCEPTIONS.COUNT LOOP
+        			DBMS_OUTPUT.PUT_LINE(SQL%BULK_EXCEPTIONS(indx).ERROR_INDEX);
+					DBMS_OUTPUT.PUT_LINE(SQL%BULK_EXCEPTIONS(indx).ERROR_INDEX);
+        		END LOOP;
+			ELSE RAISE;
+			END IF;
+END insert_sales_cursor;
+
+SELECT * FROM sales_copy;
+EXECUTE insert_sales_cursor('09-feb-2015');
