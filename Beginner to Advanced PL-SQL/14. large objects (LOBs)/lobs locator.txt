@@ -1,0 +1,12 @@
+
+	~ LOB's Locator ~
+    - Every LOB is associated with a lob locator.
+    - A lob locator is a pointer to the actual location of the LOB value.
+    - The locator associated with internal LOBs is called a LOB locator
+      while the locator associated with external LOBs is called a BFILE
+      locator.
+    - When storing data in a LOB column, you are also storing a LOB locator
+      with it.
+    - This LOB locator is what is returned to you when you select the
+      LOB column.
+    - The actual LOB value can then be retrieved using this locator.

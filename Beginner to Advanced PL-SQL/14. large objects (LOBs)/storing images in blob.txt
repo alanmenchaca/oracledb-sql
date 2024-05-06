@@ -1,0 +1,26 @@
+
+	~ Storing Images on BLOB ~
+
+CREATE TABLE job_resumes_blob (
+    resume_id NUMBER,
+    first_name VARCHAR2(100),
+    last_name VARCHAR2(100),
+    profile_picture BLOB
+);
+
+CREATE DIRECTORY AS 'C:\my_images';
+
+DECLARE
+    src BFILE := BFILENAME('my_images', 'my_picture.png');
+	dest BLOB;
+BEGIN
+    INSERT INTO job_resumes_blob VALUES (1, 'John', 'Doe', EMPTY_BLOB())
+    	RETURNING profile_picture INTO dest;
+
+	DBMS_LOB.OPEN(src, DBMS_LOB.LOB_READONLY);
+	DBMS_LOB.LoadFromFile(dest, src, DBMS_LOB.GETLENGTH(src));
+	DBMS_LOB.CLOSE(src);
+END;
+/
+
+DROP TABLE job_resumes_blob;

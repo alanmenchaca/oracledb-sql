@@ -1,0 +1,19 @@
+
+	~ Character Large Objects (CLOB) ~
+ 
+CREATE TABLE job_resumes (
+    resume_id NUMBER,
+    first_name VARCHAR2(100),
+    last_name VARCHAR2(100),
+    resume CLOB
+);
+
+SELECT SUBSTR(resume, 1, 30) FROM job_resumes;
+SELECT DBMS_LOB.SUBSTR(resume, 1, 30) FROM job_resumes;
+SELECT LENGTH(resume), DBMS_LOB.GETLENGTH(resume) FROM job_resumes;
+
+* Like this we can use various SQL functions on CLOBs.
+* We should use them only on relatively small CLOBs, up to about 100K
+  in size, as they'll give poor performance on larger LOBs.
+* When we are querying larger LOBs, we should use the DBMS_LOB package
+  functions.

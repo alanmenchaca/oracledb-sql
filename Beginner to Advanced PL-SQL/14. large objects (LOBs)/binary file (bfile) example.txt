@@ -1,0 +1,16 @@
+
+	~ Binary File (BFILE) Example ~
+BFILE refer to Binary File. The BFILE LOB holds references to large binary
+data stored as physical files in the OS outside the database.
+They do not participate in the Transactions.
+
+
+CREATE TABLE job_resumes_bfile (
+    resume_id NUMBER,
+    first_name VARCHAR2(100),
+    last_name VARCHAR2(100),
+    profile_picture BFILE
+);
+
+INSERT INTO job_resumes_bfile 
+    	VALUES(3, 'Rob', 'Grant', BFILENAME('my_images', 'my_picture.png'));

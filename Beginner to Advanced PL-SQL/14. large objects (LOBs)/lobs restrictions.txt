@@ -1,0 +1,12 @@
+
+	~ LOB's Restrictions ~
+    - LOB's cannot be a part of a clustered table.
+    - LOB's cannot be used in the following part of a SQL statement:
+        * GROUP BY
+        * ORDER BY
+        * SELECT DISTINCT
+        * JOINS
+        * Aggregate Functions
+    - LOB's cannot be analyzed using the ANALYZE command.
+    - LOB's cannot be included in a partitioned index-organized table.
+    - LOB's cannot be used in VARRAYs.

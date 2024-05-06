@@ -1,0 +1,15 @@
+
+	~ LOB's Introduction ~
+VARCHAR2 maximum size is 4000 bytes, what next?
+
+LOB's:
+    * LOBs (Large Objects) help in storig large data.
+    * LOBs help in storing unstructured data, such as video, audio,
+      photo images, etc. within the database.
+
+These LOB's can be read by programming languages such as Java, C#, Python
+to display the data.
+
+LOB's are categorized into
+    * Internal LOB's
+    * External LOB's

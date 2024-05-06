@@ -1,0 +1,58 @@
+
+	~ Temporary LOB's ~
+We can also create temporary LOB's and they are valid within the session.
+They are not part of any database table.
+Data for temporary LOB's are stored in temporary tablespace and the space
+is freed at the end of the session that created the LOB's.
+There are 3 subprograms in the DBMS_LOB package, which are related to
+temporary LOB's:
+    * CREATETEMPORARY
+    * ISTEMPORARY
+    * FREETEMPORARY
+
+DBMS_LOB.CREATETEMPORARY (
+    lob_loc IN OUT NOCOPY BLOB,
+    cache	IN			  BOOLEAN,
+    dur		IN			  PLS_INTEGER := 10
+);
+
+
+** lob_loc **
+LOB locator.
+
+** lob_loc **
+Specifies if LOB should be read into buffer cache or not.
+
+** dur **
+1 of 2 predefined duration values (SESSION or CALL) which specifies whether
+the temporary LOB is cleaned up at the end of the session or call. If dur
+is omitted, then the session duration is used.
+
+DECLARE
+    binary_lob BLOB;
+	src BFILE := BFILENAME('my_images', 'my_picture.png');
+	is_temp PLS_INTEGER;
+BEGIN
+    -- create temp LOBs
+    DBMS_LOB.CREATETEMPORARY(binary_lob, TRUE, DBMS_LOB.SESSION);
+	is_temp := DBMS_LOB.ISTEMPORARY(binary_lob);
+
+	IF is_temp = 1 THEN
+        DBMS_OUTPUT.PUT_LINE('binary_lob is temporary blob');
+    ELSIF is_temp = 2 THEN
+        DBMS_OUTPUT.PUT_LINE('binary_lob is not temporary blob');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('binary_lob locator is null');
+    END IF;
+
+	DBMS_LOB.OPEN(src, DBMS_LOB.LOB_READONLY);
+	-- opening the temporary blob
+	DBMS_LOB.OPEN(binary_blob, DBMS_LOB.LOB_READONLY);
+
+	DBMS_LOB.LoadFromFile(binary_blob, src, DBMS_LOB.GETLENGTH(src));
+
+	-- free temp LOBs
+	DBMS_LOB.FREETEMPORARY(binary_blob);
+	DBMS_LOB.CLOSE(src);
+END;
+/

@@ -1,0 +1,34 @@
+
+	~ LOB's Types ~
+    === Internal LOB's ===
+Internal LOB's are stored within the database, as columns in a table and
+participate in the transaction model of the server.
+
+* CLOB:
+A character LOB. Used to store single-byte character data.
+Maximum size: (4GB - 1) * DB_BLOCK_SIZE initialization parameter
+(8TB to 128TB, a database block size vary from 2K to 32K).
+
+* BLOB:
+A binary LOB. Used to store binary, raw data.
+Maximum size: (4GB - 1) * DB_BLOCK_SIZE initialization parameter
+(8TB to 128TB).
+
+* NCLOB:
+A LOB used to store multi-byte character data.
+Maximum size: (4GB - 1) * DB_BLOCK_SIZE initialization parameter
+(8TB to 128TB).
+
+
+=== External LOB's ===
+- External LOBs are stored outside of the database as operating 
+  system files.
+- Only a reference to the actual OS file is stored in the database.
+- External LOBs do not participate in transactions.
+
+* BFILE:
+BFILE refers to Binary File. The BFILE LOB hold references to large binary
+data stored as physical files in the OS outside the database.
+    - Maximum size: 4GB.
+    - Maximum size of a file name: 255 characters.
+    - Maximum size of a directory name: 30 characters.

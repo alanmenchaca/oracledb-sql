@@ -1,0 +1,17 @@
+
+	~ Binary Large Objects (CLOB) ~
+    - ClOBs can store only character data but BLOBs can store any type
+      of data.
+    - They are used to hold non-traditional data, such as voice or mixed
+      media (images, pdf, documents, videos).
+    - Even we can use insert character data into a BLOB, Oracle will store
+      it as raw data.
+    - This means that we can not use SQL functions line SUBSTR to handle
+      BLOB data.
+
+CREATE TABLE job_resumes_blob (
+    resume_id NUMBER,
+    first_name VARCHAR2(100),
+    last_name VARCHAR2(100),
+    resume BLOB
+);
