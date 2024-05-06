@@ -1,0 +1,29 @@
+
+	~ What is PL/SQL? ~
+  * PL/SQL stands for "Procedural Language Extension to SQL".
+  * Platform Independece.
+
+
+	~ PL/SQL Architecture ~
+  * PL/SQL - Pyhsical Architecture
+  * PL/SQL - Logical Architecture
+      - Cooperates with SQL Engine
+      - Enables Subprograms
+      - Dynamic Queries
+      - Case Insensitivity
+      - Optimizer
+      - Enables Object-Oriented Programming
+      - web Development
+
+
+	~ Database Concepts ~
+  * What is a Schema?
+      - Schemas are the collections of objects for each user in Oracle
+	database.
+  * What is HR Schema?
+      - Abbreviation of Human Resoruces. A schema that can practice on it.
+      - A schema can have objects like:
+          * Tables
+	  * Views
+	  * Triggers
+	  * Constraints, etc.

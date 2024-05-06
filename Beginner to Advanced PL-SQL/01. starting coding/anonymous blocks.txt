@@ -1,0 +1,17 @@
+
+	~ Let's Start Coding! ~
+* Blocks
+    - DECLARE (Optional)
+    - BEGIN (Mandatory)
+    - EXCEPTION (Optional)
+    - END; (Mandatory)
+
+DECLARE
+BEGIN
+    NULL;
+END;
+
+    - Three types of blocks
+        * Anonymous Blocks 
+	* Procedures
+	* Functions

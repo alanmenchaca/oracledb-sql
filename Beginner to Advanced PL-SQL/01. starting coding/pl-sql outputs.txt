@@ -1,0 +1,18 @@
+
+	~ PL/SQL Outputs ~
+* PL/SQL outputs
+    - Not an output language.
+    - SET SERVEROUTPUT ON
+    - DBMS_OUTPUT
+    - DBMS_OUTPUT.PUT_LINE(output_text);
+* Nested Blocks
+    - 
+
+SET SERVEROUTPUT ON;
+    
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('hello world!');
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('PL/SQL');
+    END;
+END;
