@@ -1,0 +1,15 @@
+
+	~ Statement Level Triggers ~
+  Statement level triggers are triggered only once for each transaction.
+
+
+CREATE TRIGGER customer_before_update BEFORE UPDATE ON CUSTOMER
+DECLARE
+	username VARCHAR2(10);
+BEGIN
+    -- Lets find the user who is performing the action
+    SELECT user INTO username FROM dual;
+
+	INSERT INTO audit_table (table_name, user_id, operation_date, operation)
+    	VALUES ('CUSTOMER', username, SYSDATE, 'Before Update Operation');
+END;

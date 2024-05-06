@@ -1,0 +1,21 @@
+
+CREATE OR REPLACE TRIGGER customer_after_update_values
+AFTER UPDATE OF customer_id ON customer 
+    FOR EACH ROW WHEN (OLD.REGION = 'SOUTH') 
+DECLARE
+	username VARCHAR2(50);
+BEGIN
+    -- Find username of person performing INSERT into table
+    SELECT user INTO username FROM dual;
+
+	INSERT INTO audit_log (userid, operation_date, b_customerid,
+        				   a_customerid, b_firstname, a_firstname)
+    VALUES (username, sysdate, :OLD.customer_id, :NEW.customer_id,
+        					   :OLD.first_name, :NEW.first_name);
+END;
+
+SELECT * FROM audit_log;
+SELECT * FROM customer;
+
+UPDATE customer SET first_name = 'Johny' 
+	WHERE first_name = 'John'; 

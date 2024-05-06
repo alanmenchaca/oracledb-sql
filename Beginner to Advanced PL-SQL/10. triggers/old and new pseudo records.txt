@@ -1,0 +1,31 @@
+ 		
+	~ OLD and NEW Pseudo records ~
+  When a row-level trigger fires, the PL/SQL runtime system creates and
+  populates the two pesudo records OLD and NEW.
+
+  * For an INSERT trigger, OLD contains no values, and NEW contains the
+    new values.
+  * For and UPDATE trigger, OLD contains the old values, and NEW contains
+    the new values.
+  * For a DELETE trigger, OLD contains the old values, and NEW contains
+    no values.
+
+CREATE OR REPLACE TRIGGER customer_after_update_values
+AFTER UPDATE ON customer FOR EACH ROW
+DECLARE
+	username VARCHAR2(50);
+BEGIN
+    -- Find username of person performing INSERT into table
+    SELECT user INTO username FROM dual;
+
+	INSERT INTO audit_log (userid, operation_date, b_customerid,
+        				   a_customerid, b_firstname, a_firstname)
+    VALUES (username, sysdate, :OLD.customer_id, :NEW.customer_id,
+        					   :OLD.first_name, :NEW.first_name);
+END;
+
+
+SELECT * FROM audit_log;
+SELECT * FROM customer;
+UPDATE customer SET first_name = 'Peter'
+WHERE first_name = 'PETER';

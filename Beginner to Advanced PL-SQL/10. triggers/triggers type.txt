@@ -1,0 +1,22 @@
+
+	~ Triggers Types ~
+  * Row Level Triggers: Row level triggers execute once for each row in
+    a transaction.
+    Row Level Triggers are created using the FOR EACH ROW clause in the
+    CREATE TRIGGER command. 
+
+  * Statement Level Triggers: Stratement level triggers are triggered
+    only once for each transaction.
+    Statement level trigger are the default types of trigger created via
+    the CREATE TRIGGER command.
+
+  * Before Trigger: BEFORE trigger execute the trigger action before the
+    triggering event (INSERT, UPDATE, or DELETE commands)
+	- BEFORE trigger are used when the trigger action should determine
+	  whether or not the triggering statement should be allowed to
+          complete.
+	- BEFORE triggers are used to derive specific column values before
+	  trigger on DELETE statement.
+
+  * After Trigger: AFTER trigger executes the trigger action after the
+   tiggering event (INSERT, UPDATE, or DELETE commands) is executed.

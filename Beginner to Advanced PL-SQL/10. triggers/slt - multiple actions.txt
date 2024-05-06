@@ -1,0 +1,24 @@
+
+CREATE OR REPLACE TRIGGER customer_after_action
+AFTER INSERT OR UPDATE OR DELETE ON customer
+DECLARE
+    username VARCHAR2(50);
+BEGIN
+    -- Find username of person performing INSERT INTO table
+    SELECT user INTO username FROM dual;
+
+	IF INSERTING THEN
+        INSERT INTO audit_table (table_name, userid, operation_date, operation)
+        	VALUES ('customer', username, sysdate, 'Insert Operation');
+    ELSIF UPDATING THEN
+        INSERT INTO audit_table (table_name, userid, operation_date, operation)
+        	VALUES ('customer', username, sysdate, 'Update Operation');
+    ELSIF DELETING THEN
+        INSERT INTO audit_table (table_name, userid, operation_date, operation)
+        	VALUES ('customer', username, sysdate, 'Delete Operation');
+    END IF;
+END;
+
+INSERT INTO customer VALUES (13, 'John', 'Doe', 'T', '234 GAVLES',
+    						 NULL, 'ATLANTA', 'USA', SYSDATE, 'SOUTH');
+SELECT * FROM audit_table;

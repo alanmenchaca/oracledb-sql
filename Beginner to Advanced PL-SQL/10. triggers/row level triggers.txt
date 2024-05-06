@@ -1,0 +1,20 @@
+
+	~ Row Level Triggers ~
+  Row level triggers execute once for each row in a transaction.
+
+
+CREATE OR REPLACE TRIGGER customer_after_update
+    AFTER UPDATE ON customer FOR EACH ROW
+DECLARE
+    username VARCHAR2(50);
+BEGIN
+    -- Find username of person performing INSERT INTO table
+    SELECT user INTO username FROM dual;
+
+	INSERT INTO audit_table (table_name, userid, operation_date, operation)
+        VALUES ('customer', username, sysdate, 'Update Operation Row Level');
+END;
+
+UPDATE customer SET date_added = sysdate
+    WHERE region = 'SOUTH';
+SELECT * FROM audit_table;

@@ -1,0 +1,13 @@
+
+	~ Triggers ~
+  Triggers are stored programs, which are automatically executed or fired
+  when some events occur. Triggers are, in fact, written  to be executed
+  in response to any of the following events.
+
+  * A database manipulation (DML) statement (DELETE, INSERT, or UPDATE).
+  * A database definition (DDL) statement (CREATE, ALTER, or DROP).
+  * A database operation (SERVERERROR, LOGON, LOGOFF, STARTUP or
+    SHUTDOWN).
+
+  Triggers could be defined on the table, view, schema, or database with
+  which the event is associated.
