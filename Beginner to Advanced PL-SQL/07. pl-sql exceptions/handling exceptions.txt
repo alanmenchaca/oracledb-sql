@@ -1,0 +1,17 @@
+
+	* Handling Exceptions
+		DECLARE
+			...
+		BEGIN
+			{An exception occurs here}
+		EXCEPTION
+			WHEN exception_name THEN
+				...
+			WHEN others THEN
+				...
+		END;
+
+		- There are three types of exceptions:
+			* Predefined Oracle Server Errors
+			* Nonpredefined Oracle Server Errors
+			* User-defined Errors

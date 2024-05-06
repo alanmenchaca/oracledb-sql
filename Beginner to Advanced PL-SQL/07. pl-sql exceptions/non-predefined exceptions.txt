@@ -1,0 +1,9 @@
+
+	* Non-predefined Exceptions
+		- Unnamed Exceptions
+		- We cannot trap with the error codes
+		- We declare exceptions with the error codes
+
+		exception_name EXCEPTION;
+		PRAGMA EXCEPTION_INIT(exception_name, error_code)
+		

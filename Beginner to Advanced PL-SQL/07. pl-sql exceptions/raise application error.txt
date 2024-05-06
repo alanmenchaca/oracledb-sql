@@ -1,0 +1,11 @@
+
+	* RAISE_APPLICATION_ERROR Procedure
+		- Sometimes we need to raise an exception out of the block. 
+		- raise_application_error raises the error to the caller.
+		
+		raise_application_error(error_number, error_message[, TRUE|FALSE]);
+
+		- What is the error stack?
+		- Will stop execution of the application
+		- Error number muste be bewteen -20000 and -20999
+		- Message will be up to 2048 bytes long

@@ -1,0 +1,11 @@
+
+	* User-predefined Exceptions & Raising Exceptions
+		- We need to handle some exceptions about our business.
+		- These exceptions are not an error for the database.
+		- Define a user-defined exception and raise it.
+		
+		exception_name EXCEPTION;
+		RAISE exception_name;
+
+		- We can raise any type of exceptions with RAISE statement.
+		 

@@ -1,0 +1,19 @@
+
+	* What are the Exceptions?
+		- A block has three sections.
+			* Declaration section.
+			* Begin-End section
+			* Exception section
+		- We can handle exceptions in three ways
+			1. Trap
+			2. Propagate
+			3. Trap & Propagate
+
+	DECLARE
+	    v_name VARCHAR2(50);
+	BEGIN
+	    SELECT first_name INTO v_name FROM hr.employees
+	    WHERE employee_id = 50;
+		DBMS_OUTPUT.PUT_LINE('Hello');
+	END;
+	 
