@@ -1,0 +1,24 @@
+
+	~ Object Creation ~
+
+TYPE sales_info_record IS RECORD (
+	sale_date	sales.sales_date%TYPE,
+    order_id 	sales.order_id%TYPE,
+    product_id  sales.product_id%TYPE,
+    customer_id sales.customer_id%TYPE,
+    quantity	sales.quantity%TYPE
+);
+
+Now, we can create an object in the database.
+
+CREATE OR REPLACE TYPE sales_row AS OBJECT (
+	sales_date DATE,
+    sales_order_id NUMBER,
+    sales_product_id NUMBER,
+    sales_customer_id NUMBER,
+    sales_total_amount NUMBER
+);
+
+Now, we create a table of type sales_row
+
+CREATE TYPE sales_table IS TABLE OF sales_row;

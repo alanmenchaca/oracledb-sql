@@ -1,0 +1,32 @@
+
+	~ Pipelined Functions ~
+Pipelining negates the need to build huge collections by piping rows
+out of the function as they are created, saving memory and allowing
+subsequent processing to start before all the rows are generated.
+
+-- row type creation
+CREATE OR REPLACE TYPE sales_row AS OBJECT (
+    sales_date DATE,
+    sales_order_id NUMBER,
+    sales_product_id NUMBER,
+    sales_customer_id NUMBER,
+    sales_total_amount NUMBER
+);
+
+-- sales table creation, specifying the type of the row
+CREATE TYPE sales_table IS TABLE OF sales_row;
+
+CREATE OR REPLACE FUNCTION fetch_sales_table (
+	sales_order_id NUMBER
+) RETURN sales_table PIPELINED IS
+BEGIN
+    FOR sale IN (SELECT sales_date, order_id, product_id, 
+    			 		customer_id, total_amount
+    		  	 FROM sales WHERE order_id = order_id) LOOP
+    	PIPE ROW(SALES_ROW(sale.sales_date, sale.order_id, sale.product_id,
+    					   sale.customer_id, sale.total_amount));
+    END LOOP;
+END;
+
+-- running function like querying from a regular table.
+SELECT * FROM fetch_sales_table(1267);

@@ -1,0 +1,32 @@
+
+	~ Table Functions ~
+
+-- row type creation
+CREATE OR REPLACE TYPE sales_row AS OBJECT (
+    sales_date DATE,
+    sales_order_id NUMBER,
+    sales_product_id NUMBER,
+    sales_customer_id NUMBER,
+    sales_total_amount NUMBER
+);
+
+-- sales table creation, specifying the type of the row
+CREATE TYPE sales_table IS TABLE OF sales_row;
+
+CREATE OR REPLACE FUNCTION fetch_sales_table (
+	sales_order_id NUMBER
+) RETURN sales_table IS l_table sales_table := sales_table();
+BEGIN
+    FOR sale IN (SELECT sales_date, order_id, product_id, 
+    			 customer_id, total_amount
+    		  	 FROM sales WHERE order_id = order_id) LOOP
+    	l_table.EXTEND;
+		l_table(l_table.LAST) := 
+            	sales_row(sale.sales_date, sale.order_id, sale.product_id, 
+            			  sale.customer_id, sale.total_amount);
+    END LOOP;
+	RETURN l_table;
+END;
+
+-- running function like querying from a regular table.
+SELECT * FROM TABLE(fetch_sales_table(1267));
