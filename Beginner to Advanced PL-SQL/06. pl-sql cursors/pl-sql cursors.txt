@@ -1,0 +1,10 @@
+
+    * what are cursors and cursros types?
+	- Cursors are pointers to the data.
+	- There are two types of cursors:
+	    * Implicit Cursors
+	    * Explicit Cursors
+	- We can control the cursors
+	- Explicit cursors are created by the programmers
+	- Collections vs Cursors
+	- You cannot go back in cursors

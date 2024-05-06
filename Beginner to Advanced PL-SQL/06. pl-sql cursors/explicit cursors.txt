@@ -1,0 +1,16 @@
+
+    * USING EXPLICIT CURSORS
+	- The Cursor Usage:
+	    * DECLARE
+	    * OPEN
+	    * FETCH
+	    * CHECK
+	    * CLOSE
+
+DECLARE
+    CURSOR cursor_name IS select_statement;
+BEGIN
+    OPEN cursor_name;
+    FETCH cursor_name INTO variables, records, etc;
+    CLOSE cursor_name;
+END;

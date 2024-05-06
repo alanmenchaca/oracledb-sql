@@ -1,0 +1,14 @@
+
+    * CURSORS WITH PARAMETERS
+        - Cursors can be used for many times
+        - We can use cursors with parameters
+
+
+DECLARE
+    CURSOR cursor_name(parameter_name datatype, ...)
+    IS select_statement;
+BEGIN
+	OPEN cursor_name;
+    FETCH cursor_name INTO variables, records, etc;
+    CLOSE cursor_name;
+END;

@@ -1,0 +1,11 @@
+
+	* FOR UPDATE CLAUSE
+		- When we update a row, it is locked to the others.
+		- for update clause locks the selected rows
+		- nowait option will terminate execution if there is a lock.
+		* Default options is wait.
+		* for update of clause locks only the selected tables
+			CURSOR cursor_name(parameter_name datatype, ...)
+				IS select_statement
+				FOR UPDATE [OF column(s)] [NOWAIT | WAIT n]
+ 

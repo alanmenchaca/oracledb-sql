@@ -1,0 +1,15 @@
+
+	* REFERENCE CURSORS (REF CURSORS)
+		- Cursors are pointers.
+		- We can user a cursor for multiple queries:
+		- We cannot:
+			* Assing null values
+			* Use in table-view create codes
+			* Store in collections
+			*  Compare
+		- There are two types of reference cursors:
+			* Strong (restrictive) cursors
+			* Weak (nonrestrictive) cursors
+		TYPE cursor_type_name IS REF CURSOR [return return_type]
+		OPEN cursors_variable_name FOR query;
+		 

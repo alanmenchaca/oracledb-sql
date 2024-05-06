@@ -1,0 +1,7 @@
+
+	* CURSOR ATTRIBUTES
+		* There are four cursor attributes
+			- %FOUND - Returns true if the fetch returned a row.
+			- %NOTFOUND - Opposite of %found.
+			- %ISOPEN - Returns true if the cursor is open.
+			- %ROWCOUNT - Returns the number of fetched rows.
