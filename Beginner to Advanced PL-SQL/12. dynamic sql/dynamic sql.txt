@@ -1,0 +1,33 @@
+
+	~ Dynamic SQL ~
+  Dynamic SQL is a programming methodology used in below scenarios:
+  * Generating and runnnig SQL statements at run time.
+  * It is useful when writing general-purpose and flexible programs
+    like ad hoc query systems.
+  * When you must run database definition language (DDL) statements
+    inside your PL/SQL program.
+  * The number or data types of its input and output variables.
+
+  PL/SQL provides two ways to write dynamic SQL
+  * Native dynamic SQL, a PL/SQL language feature for building and 
+    running dynamic SQL statements.
+  * DBMS_SQL package, an API for building, running, and describing 
+    dynamic SQL statements.
+
+  The EXECUTE IMMEDIATE statement is the means by which native dynamic
+  SQL processes most dynamic SQL statements.
+
+  BEGIN
+      EXECUTE IMMEDIATE 'CREATE TABLE x (a NUMBER)';
+  END;
+
+  CREATE PROCEDURE update_customer (
+      customer_id_param IN NUMBER
+  ) AS
+  BEGIN
+      EXECUTE IMMEDIATE 'UPDATE sales SET total_amount = total_amount * 0.9
+			    WHERE customer_id = ' || customer_id_param;
+  END;
+
+  EXECUTE update_customer(11);
+  SELECT * FROM sales;

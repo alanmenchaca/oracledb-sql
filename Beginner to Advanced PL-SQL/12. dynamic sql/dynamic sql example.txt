@@ -1,0 +1,38 @@
+
+CREATE OR REPLACE PROCEDURE fetch_sales_dynamic (
+	order_id_param IN sales.order_id%TYPE,
+    customer_id_param IN sales.customer_id%TYPE
+) AS 
+    sale_record sales%ROWTYPE;
+    sql_stmt VARCHAR(500) := 'SELECT * FROM sales WHERE 1 = 1';
+BEGIN
+    IF order_id_param IS NOT NULL THEN
+    	sql_stmt := sql_stmt || ' AND order_id = ' || order_id_param;
+    END IF;
+
+	IF customer_id_param IS NOT NULL THEN
+        sql_stmt := sql_stmt || ' AND customer_id = ' || customer_id_param;
+    END IF;
+
+	DBMS_OUTPUT.PUT_LINE(sql_stmt);
+	EXECUTE IMMEDIATE sql_stmt INTO sale_record;
+
+	DBMS_OUTPUT.PUT_LINE(sale_record.sales_date);
+    DBMS_OUTPUT.PUT_LINE(sale_record.order_id);
+    DBMS_OUTPUT.PUT_LINE(sale_record.product_id);
+    DBMS_OUTPUT.PUT_LINE(sale_record.customer_id);
+	DBMS_OUTPUT.PUT_LINE(sale_record.total_amount);
+
+	EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        	DBMS_OUTPUT.PUT_LINE('No such order!');
+        WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE('You got more than 1 row!');
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('Error!');
+END fetch_sales_dynamic;
+/
+
+EXECUTE fetch_sales_dynamic(1268, NULL);
+EXECUTE fetch_sales_dynamic(NULL, 11);
+EXECUTE fetch_sales_dynamic(1268, 11);

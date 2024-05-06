@@ -1,0 +1,26 @@
+
+CREATE OR REPLACE PROCEDURE update_tax (
+    tax_rate IN number
+) AS
+    eligible BOOLEAN;
+	TYPE order_ids_type IS TABLE OF sales.order_id%TYPE 
+        INDEX BY PLS_INTEGER; -- Associative Array
+	order_ids order_id_type;
+	eligible_orders order_id_type;
+	sql_stmt VARCHAR2(100) := 'SELECT DISTINCT order_id FROM sales'; 
+BEGIN
+	EXECUTE IMMEDIATE sql_stmt BULK COLLECT INTO order_ids;
+	FOR indx IN 1..order_ids.COUNT LOOP
+    	check_eligible(order_ids(indx), eligible);
+
+		IF eligible THEN
+			eligible_orders(eligible_orders.COUNT + 1) := order_ids(indx);
+        END IF;
+    END LOOP;
+
+	FOR ALL indx IN 1..eligible_orders.COUNT
+    	UPDATE sales s SET s.tax_amount = s.total_amount * tax_rate
+        WHERE s.order_id = eligible_orders(indx);
+
+	COMMIT;
+END update_tax;

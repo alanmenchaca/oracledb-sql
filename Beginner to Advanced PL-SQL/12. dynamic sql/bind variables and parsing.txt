@@ -1,0 +1,28 @@
+
+	~ Bind Variables and Parsing ~
+  Each time the query is submitted
+  * Oracle first checks in the shared pool to see wether this statement 
+    has been submitted before.
+  * If it has, the execution plan that this statement previously used is
+    retrieved, and the SQL is executed.
+  * If the statement cannot be found in the shared pool, Oracle has to go
+    through the proccess of parsing the statement, working out the various
+    execution paths and coming up with an optimal access plan before it
+    can be executed.
+  * This process is know as a hard parse and for OLTP applications can
+    actually take longer to carry out that the DML instruction itself.
+
+SELECT sales_date, order_id, product_id, customer_id, total_amount
+FROM sales WHERE customer_id = 12;
+SELECT sales_date, order_id, product_id, customer_id, total_amount
+FROM sales WHERE customer_id = 11;
+SELECT sales_date, order_id, product_id, customer_id, total_amount
+FROM sales WHERE customer_id = 10;
+
+SELECT sales_date, order_id, product_id, customer_id, total_amount
+FROM sales WHERE customer_id = :cust_no;
+
+  By using BIND variables, we are using the SQL parsing which was done for
+  the 1st time, thus avoiding the Hard Parse every single time you execute
+  the procedure.
+  This is referred as soft parse.

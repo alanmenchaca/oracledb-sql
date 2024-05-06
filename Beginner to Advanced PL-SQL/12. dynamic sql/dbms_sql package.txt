@@ -1,0 +1,30 @@
+
+CREATE OR REPLACE PROCEDURE delete_customer (
+    customer_id IN NUMBER
+) AS 
+    cursor_name INTEGER;
+	rows_processed INTEGER;
+BEGIN
+    -- Open the cursor
+    cursor_name := DBMS_SQL.OPEN_CURSOR;
+
+	-- Parsing the SQL statement
+	DBMS_SQL.PARSE(cursor_name,
+        'DELETE FROM customer WHERE customer_id = :var_1', DBMS_SQL.NATIVE);
+
+	-- Binding the variables
+	DBMS_SQL.BIND_VARIABLE(cursor_name, ':var_1', customer_id);
+
+	-- Executing the cursor
+	rows_processed := DBMS_SQL.EXECUTE(cursor_name);
+
+	-- Closing the cursor
+	DBMS_SQL.CLOSE_CURSOR(cursor_name);
+
+	EXCEPTION 
+        WHEN OTHERS THEN
+        	DBMS_SQL.CLOSE_CURSOR(cursor_name);
+END delete_customer;
+
+SELECT * FROM customer;
+EXECUTE delete_customer(12);
