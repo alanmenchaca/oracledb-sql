@@ -1,0 +1,11 @@
+
+    * PL/SQL RECORDS
+       	r_name TABLE_NAME%ROWTYPE;
+	TYPE type_name IS RECORD (
+	variable_name variable_type,
+        [variale_name variable_type,]
+        [...]);
+
+	- In Variable Types area, we can use:
+	    * All Valid PL/SQL Types, %TYPE, %ROWTYPE, 
+	      NOT NULL and DEFAULT keywords.

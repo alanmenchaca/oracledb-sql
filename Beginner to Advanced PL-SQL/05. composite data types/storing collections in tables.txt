@@ -1,0 +1,6 @@
+
+    * Storing collections in Tables 
+	- We can store varrays and nested tables in database tables.
+	- They are stored with different methods
+	- Store and use easier-faster
+	- Our types must be schema level

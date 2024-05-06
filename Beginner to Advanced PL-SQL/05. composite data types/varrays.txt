@@ -1,0 +1,9 @@
+
+    * VARRAYS
+       	- Identical of Arrays in other languages.
+	- Upper limit is certain.
+	-  About VARRAYS:	
+	    * Varrays are bounded 
+	    * It's index start from 1
+	    * Varrays are one dimensional arrays
+	    * Varrays are null by default

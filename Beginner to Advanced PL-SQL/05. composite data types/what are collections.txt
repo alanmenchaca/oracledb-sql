@@ -1,0 +1,9 @@
+
+    * WHAT ARE COLLECTIONS?
+       	- The second type of the composite data types.
+	- Collections have a list of the same type.
+	- There are 3 types of collections:
+	    * Nested Tables
+	    * VARRAYs
+	    * Associative Arrays
+  

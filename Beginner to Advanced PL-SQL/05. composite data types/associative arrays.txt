@@ -1,0 +1,12 @@
+
+    * Storing Collections in Tables (with Associative Arrays)
+	- Known as Index By Tables.
+	- Compare to other collections.
+	    * The key can have a string (the key must be unique)
+	    * Keys does not need to be sequential
+	    * Can have scalar & record types
+	    * Do not initialize associative arrays
+	    * Associative arrays are indexed
+	  TYPE type_name AS TABLE OF value_data_type [NOT NULL]
+	  INDEX BY {PLS_INTEGER | BINARY_INTEGER | VARCHAR2(size)};
+ 

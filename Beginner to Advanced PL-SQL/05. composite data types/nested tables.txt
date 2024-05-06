@@ -1,0 +1,11 @@
+
+    * NESTED TABLES
+	- Very similar with the varrays.
+	- Compare to varrays:
+	    * Key-Value Pairs 
+	    * 2GB at most
+	    * We can delete any values
+	    * Not stored consecutively
+	    * Nested tables are unbounded
+	TYPE type_name AS TABLE OF
+	     value_data_type [NOT NULL];
