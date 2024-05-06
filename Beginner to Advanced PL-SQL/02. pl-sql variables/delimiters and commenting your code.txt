@@ -1,0 +1,19 @@
+
+	~ Variables ~
+* Delimiters & commenting your code.
+    - Delimiters are symbols with meaning.
+        * Addition (*)
+        * Substraction | Negation (-)
+        * Multiplication (*)
+        * Divison (/)
+        * Equality (=)
+        * Remote Access (@)
+        * Statement (;)
+
+    - Compound Symbols
+	* Inequality (<>)
+	* Inequality (!=)
+	* Concatentation (||)
+	* Assignment (:=)
+	* Single Line Comment (--)
+	* Multi-Line Comment (/* */)

@@ -1,0 +1,21 @@
+
+	~ Variables ~
+* What are variables and why do we need them?
+    - PL-SQL Variable Types
+        * Scalar
+	    01. CHAR(max_length)
+	    02. VARCHAR2(max_length)
+	    03. NUMBER(precision, scale)
+	    04. BINARY_INTEGER = PLSINTEGER
+	    05. BINARY_FLOAT
+	    06. BINARY_DOUBLE
+	    07. BOOLEAN
+	    08. DATE
+	    09. TIMESTAMP(precision)
+	    10. TIMESTAMP(p) WITH TIME ZONE
+	    11. TIMESTAMP(p) WITH LOCAL TIME ZONE
+	    12. INTERVAL(p) YEAR TO MONTH 
+	    13. INTERVAL(p) DAY TO SECOND(p)
+	* Reference
+        * Large Objects
+        * Composite

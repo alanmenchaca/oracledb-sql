@@ -1,0 +1,20 @@
+
+	~ Variables ~
+* Declaring & Initializing & Using Variables
+    - General Usage:
+    Name [CONSTANT] datatype [NOT NULL] [:= DEFAULT value|expression];
+ 
+DECLARE
+    v_text VARCHAR2(50) NOT NULL DEFAULT 'hello world!'; 
+BEGIN
+    DBMS_OUTPUT.PUT_LINE(v_text);
+END;
+
+DECLARE
+    v_text VARCHAR2(50) NOT NULL DEFAULT 'hello world!'; 
+	v_number NUMBER(10, 5) NOT NULL := 50.42;
+BEGIN
+    v_text := 'PL/SQL' || ' course';
+    DBMS_OUTPUT.PUT_LINE(v_text || ' beginner to advanced');
+	DBMS_OUTPUT.PUT_LINE(v_number || ' beginner to advanced');
+END;

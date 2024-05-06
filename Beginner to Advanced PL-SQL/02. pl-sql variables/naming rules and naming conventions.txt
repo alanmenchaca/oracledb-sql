@@ -1,0 +1,13 @@
+
+	~ Variables ~
+* Variable Naming Rules
+    - Must start with a letter.
+    - Can contain some special characters (like _, #, $).
+    - Can be maximum 30 characters.
+    - Can not have Oracle's reserved words (SELECT, VARCHAR2, etc).
+* Naming Conventions
+    - VARIABLE - v_variable_name - v_max_salary
+    - CURSOR - cur_cursor_name - cur_employees
+    - EXCEPTION - e_exception_name - e_invalid_salary 
+    - PROCEDURE - p_procedure_name - p_calculate_salary
+    - BIND VARIABLE - b_bind_name - b_emp_id

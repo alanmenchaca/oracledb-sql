@@ -1,0 +1,6 @@
+
+	~ Variables ~
+* Using Bind Variables
+    - Increases Performance
+    - Created in the host environment
+    - Its scope is whole whorksheet
