@@ -1,0 +1,6 @@
+
+    * Nesting and Labeling the Loops
+        - We can nest loops...
+	- We can use labels for loops.
+	- Exting the inner loop will not exit the outer.
+	- We can use labels to exit the outer loop.

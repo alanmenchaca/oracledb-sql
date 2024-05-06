@@ -1,0 +1,27 @@
+
+    * LOOPS
+        - Basic Loops
+	LOOP
+		your code;
+		    ...
+		    ...
+		EXIT [WHEN condition];
+	END LOOP;
+
+	- While Loops
+	WHILE condition LOOP
+		your_code;
+		    ...
+		    ...
+	END LOOP;
+
+	- For Loops
+	FOR counter LOOP [REVERSE]
+		lower_bound..upper_bound LOOP
+		your_code;
+			...
+			...
+	END LOOP;
+	    * We cannot reach the counter outside the loop.
+	    * We cannot assign any value to the counter.
+	    * Our bounds cannot be null.

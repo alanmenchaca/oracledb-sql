@@ -1,0 +1,10 @@
+
+    * CASE EXPRESSIONS
+        CASE [expression || condition]
+		WHEN condition_1 THEN result_1
+		WHEN condition_1 THEN result_2
+			...
+			...
+	       [WHEN condition_1 THEN result_n]
+	       [ELSE result]
+	END;

@@ -1,0 +1,9 @@
+
+    * IF STATEMENT
+        - What does Control Structures Mean?
+	- What is IF Statement?
+	IF condition THEN statements;
+	[ELSIF conition THEN statments;]
+	[ELSIF conition THEN statments;]
+	[ELSE statments;]
+	END IF;

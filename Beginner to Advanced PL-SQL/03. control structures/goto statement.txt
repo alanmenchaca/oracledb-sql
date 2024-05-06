@@ -1,0 +1,10 @@
+
+    * GOTO STATEMENT
+        - How is it used?
+	GOTO label_name;
+		
+	- There are some restrictions:
+	    * Into a control structure
+	    * Into an inner block from the outer
+	    * Out of a subprogram
+	    * In or Out of an Exception handler
