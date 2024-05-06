@@ -1,0 +1,7 @@
+
+	* Regular & Pipelined Table Functions
+		- What are table functions?
+			* Table functions return a table of varray or nested tables.
+		- Regular table functions returns after completing the whole data.
+		- Pipelined functions return each row one by one.
+ 

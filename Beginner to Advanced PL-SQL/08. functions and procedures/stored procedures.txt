@@ -1,0 +1,13 @@
+
+	* Creating and Using Stored Procedures
+		- If you need to do the same thing again and again, you use
+		  procedures.
+
+		CREATE [OR REPLACE] PROCEDURE procedure_name
+			[(parameter_name [IN | OUT | IN OUT] type [type [, ...]])] {IS | AS}
+			... -- declarative section
+		BEGIN
+			...
+		EXCEPTION
+			...
+		END;

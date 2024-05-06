@@ -1,0 +1,8 @@
+
+	* Handling the Exceptions in Subprograms
+		- We can have an exception section in all begin-end blocks.
+		- When an exception is raised, the control is passed to the
+		  exception section.
+		- We may have exceptions in functions & procedures, too.
+		- In subprograms, the unhandled exceptions is raised to the caller.
+		- We should handle all the possible exceptions.

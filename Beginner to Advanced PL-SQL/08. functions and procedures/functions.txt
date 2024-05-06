@@ -1,0 +1,31 @@
+
+	* Creating and Using Functions
+		- Functions are pretty similar with the procedures.
+		- Fuctions can get IN and OUT parameters
+		- Functions must REUTRN a value.
+		- Functions are very similar with procedures on creation, except
+		  its usage.
+		- Functions can be used within a select statement.
+		- You can assign a function to a variable.
+
+		CREATE [OR REPLACE] FUNCTION function_name
+			[(parameter_name [IN | OUT | IN OUT] type DEFAULT value|expression
+			[, ...])] RETURN return_data_type {IS | AS}
+
+		- Differences and Similarities of Functions & Procedures
+			* Procedures are executed within a begin-end block or with 
+			  execute command.
+			* Functions are used within an SQL Query or assigned to some
+			  variable.
+				- We can't use functions standalone.
+			* We can pass IN & OUT parameters to both.
+			* Procedures does not return a value, but functions return.
+
+		- The restrictions of using functions in SQL expressions
+			* Must be compiled and stored in the database.
+			* Your functions should not have an OUT parameter.
+			* Must return a valid type of the SQL Data Types.
+			* Cannot be used in table creation codes.
+			* Cannot call a function that contains a DML Statement.
+			* Cannot include COMMIT, ROLLBACK or DDL statements.
+			* We ned to have the related privileges. 

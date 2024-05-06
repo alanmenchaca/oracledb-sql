@@ -1,0 +1,9 @@
+
+	* Functions & Procedures
+		- Reusability is important in programming
+		- What are the differences than anonymous blocks?
+			- Stored in the database with names. 
+			- Compiled only once.
+			- Can be called by another block or application.
+			- Can return values.
+			- Can take parameters.

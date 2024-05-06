@@ -1,0 +1,14 @@
+
+	* Named & Mixed Notations and Default Option
+		- We can run the procedures with or without functions.
+		- We do that with DEFAULT option.
+
+		CREATE [OR REPLACE] PROCEDURE procedure_name
+			[(parameter_name [IN | OUT | IN OUT] type DEFAULT value|expression
+			[, ...])] {IS | AS}
+
+		* Named notations allows us to pass parameter independent from
+		  the position.
+
+		 EXECUTE procedure_name(parameter_name => value|expression);
+		 

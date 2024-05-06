@@ -1,0 +1,13 @@
+
+	*  Local Subprograms
+		- We create procedures and functions to reduce the code crowd.
+		- They are called as stored procedures & stored functions.
+		- Sometimes it is unnecessary to store the subprograms.
+		- We can create subprograms inside of an anonymous block or in
+		  another subprogram.
+		- The benefits of local subprograms:
+			* Reduce code repetition
+			* Improve code readability
+			* Need no more privilege
+		- The cons of the local variables:
+			* They are accessible only in the bocks they are defined

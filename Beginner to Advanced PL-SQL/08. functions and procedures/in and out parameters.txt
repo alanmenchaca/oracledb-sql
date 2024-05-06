@@ -1,0 +1,13 @@
+
+	* Using IN & OUT Parameters
+		- We can create our procedures and functions with parameters
+
+		CREATE [OR REPLACE] PROCEDURE procedure_name
+			[(parameter_name [IN | OUT | IN OUT] type [, ...])] {IS | AS}
+				... -- declarative section
+		BEGIN
+			...
+		EXCEPTION
+			...
+		END;
+ 
