@@ -1,0 +1,8 @@
+
+    * DML OPERATIONS IN PL/SQL
+        - We can use DML commands in PL/SQL code.
+	- We can use PL/SQL variables in a DML command.
+	     * INSERT
+	     * UPDATE
+	     * DELETE
+	     * MERGE
