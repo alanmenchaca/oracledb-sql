@@ -1,0 +1,43 @@
+
+	~ PL/SQL Packages to organize code ~
+* A package is a schema object that groups logically related PL/SQL types,
+  items, and subprograms like procedures and functions.
+
+* Packages can hold other constructs too, such as exceptions, variables,
+  cursors and type declarations.
+
+* Packages usually have two parts:
+      - Specification
+      - Body
+
+
+	[Advantages of Packages]
+* Modularity:
+  Packages let you encapsulate logically related types, items, and
+  subprograms in a named PL/SQL module. Each package is easy to understand
+  and the interfaces between packages are simple, clear, and well defined.
+
+* Easier Application Design:
+  When designing an application, all you need initially is the interface
+  information in the package specs. You can code and compile a spec without
+  its body. Then, stored subprograms that reference the package can be
+  compiled as well. You need not define the package bodies fully until you
+  are ready to complete the application.
+
+* Information Hiding:
+  With packages, you can specify which types, items, and subprograms are
+  public (visible and accessible) or private (hidden and inaccessible).
+  This simplifies maintenance and enhancement. Also, by hiding 
+  implementation details from users, you protect the integrity of the
+  package.
+
+* Better performance:
+  When you call a packaged subprogram for the first time, the whole package
+  is loaded into memory. So, later calls to related subprograms in the
+  package require no disk I/O.
+
+* Added Functionality:
+  Packaged public variables and cursors persist for the duration of a
+  session. So, they can be shared by all subprograms that execute in the
+  environment. Also, they allow you to maintain data across transactions
+  without having to store in the database.  

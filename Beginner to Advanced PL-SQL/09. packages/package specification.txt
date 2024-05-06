@@ -1,0 +1,136 @@
+
+	~ Package Specification ~
+* The package specification tells a user of the package what it can do
+  rather than how it will do it. The spec contains the headers of the
+  program units rather than any executable code.
+
+  It's kind of like a declaration section for program units.
+  CREATE OR REPLACE PACKAGE package_name
+  AS
+	program_1_header;
+	program_2_header;
+	program_1_header;
+  END package_name;
+  /
+
+
+CREATE OR REPLACE PROCEDURE display_sales_by_order_id (
+    order_id_param IN NUMBER
+) AS
+    sales_date     sales.sales_date%type;
+	order_id       sales.order_id%type;
+    product_id	   sales.product_id%type;
+    customer_id	   sales.customer_id%type;
+    salesperson_id sales.salesperson_id%type;
+    quantity	   sales.quantity%type;
+    unit_price	   sales.unit_price%type;
+    sales_amount   sales.sales_amount%type;
+    tax_amount	   sales.tax_amount%type;
+    total_amount   sales.total_amount%type;
+BEGIN
+    SELECT sales_date, order_id, product_id, customer_id,
+    	   salesperson_id, quantity, unit_price, sales_amount,
+    	   tax_amount, total_amount
+    INTO sales_date, order_id, product_id, customer_id,
+    	 salesperson_id, quantity, unit_price, sales_amount,
+    	 tax_amount, total_amount
+    FROM sales
+    WHERE order_id = order_id_param;
+
+    DBMS_OUTPUT.PUT_LINE('Sales Date: ' || sales_date);
+	DBMS_OUTPUT.PUT_LINE('Order ID: ' || order_id);
+    DBMS_OUTPUT.PUT_LINE('Product ID: ' || product_id);
+    DBMS_OUTPUT.PUT_LINE('Customer ID: ' || customer_id);
+    DBMS_OUTPUT.PUT_LINE('Salesperson ID: ' || salesperson_id);
+    DBMS_OUTPUT.PUT_LINE('Quantity: ' || quantity);
+    DBMS_OUTPUT.PUT_LINE('Unit Price: ' || unit_price);
+    DBMS_OUTPUT.PUT_LINE('Sales Amount: ' || sales_amount);
+    DBMS_OUTPUT.PUT_LINE('Tax Amount: ' || tax_amount);
+	DBMS_OUTPUT.PUT_LINE('Total Amount: ' || total_amount);
+END display_sales_by_order_id;
+/
+
+
+CREATE OR REPLACE PROCEDURE display_and_count_rows (
+    order_id_param IN NUMBER,
+    number_of_rows OUT NUMBER
+) AS
+    sales_date_var sales.sales_date%type;
+	order_id       sales.order_id%type;
+    product_id	   sales.product_id%type;
+    customer_id	   sales.customer_id%type;
+    salesperson_id sales.salesperson_id%type;
+    quantity	   sales.quantity%type;
+    unit_price	   sales.unit_price%type;
+    sales_amount   sales.sales_amount%type;
+    tax_amount	   sales.tax_amount%type;
+    total_amount   sales.total_amount%type;
+BEGIN
+    SELECT sales_date, order_id, product_id, customer_id,
+    	   salesperson_id, quantity, unit_price, sales_amount,
+    	   tax_amount, total_amount
+    INTO sales_date_var, order_id, product_id, customer_id,
+    	 salesperson_id, quantity, unit_price, sales_amount,
+    	 tax_amount, total_amount
+    FROM sales WHERE order_id = order_id_param;
+
+	SELECT COUNT(order_id) 
+        INTO number_of_rows
+    FROM sales WHERE sales_date = sales_date_var;
+
+    DBMS_OUTPUT.PUT_LINE('Sales Date: ' || sales_date_var);
+	DBMS_OUTPUT.PUT_LINE('Order ID: ' || order_id);
+    DBMS_OUTPUT.PUT_LINE('Product ID: ' || product_id);
+    DBMS_OUTPUT.PUT_LINE('Customer ID: ' || customer_id);
+    DBMS_OUTPUT.PUT_LINE('Salesperson ID: ' || salesperson_id);
+    DBMS_OUTPUT.PUT_LINE('Quantity: ' || quantity);
+    DBMS_OUTPUT.PUT_LINE('Unit Price: ' || unit_price);
+    DBMS_OUTPUT.PUT_LINE('Sales Amount: ' || sales_amount);
+    DBMS_OUTPUT.PUT_LINE('Tax Amount: ' || tax_amount);
+	DBMS_OUTPUT.PUT_LINE('Total Amount: ' || total_amount);
+END display_and_count_rows;
+/
+    
+
+CREATE OR REPLACE FUNCTION defined_pow (
+    base NUMBER,
+    exp NUMBER
+) RETURN NUMBER AS
+BEGIN
+	RETURN POWER(base, exp);
+END defined_pow;
+/
+
+    
+CREATE OR REPLACE FUNCTION count_rows_by_sales_date (
+    sales_date_param VARCHAR
+) RETURN NUMBER AS
+	count_rows NUMBER := 0;
+BEGIN
+	SELECT COUNT(order_id) INTO count_rows
+    FROM sales WHERE sales_date = sales_date_param;
+	RETURN count_rows;
+END;
+/
+    
+
+CREATE OR REPLACE PACKAGE customer_package AS
+    PROCEDURE display_sales_by_order_id (
+    	order_id_param IN NUMBER
+    );
+
+    PROCEDURE display_and_count_rows (
+    	order_id_param IN NUMBER,
+    	number_of_rows OUT NUMBER
+    );
+
+    FUNCTION defined_pow (
+    	base NUMBER,
+    	exp NUMBER
+    ) RETURN NUMBER;
+
+    FUNCTION count_rows_by_sales_date (
+    	sales_date_param VARCHAR
+    ) RETURN NUMBER;
+END customer_package;
+/
